@@ -1,34 +1,35 @@
-public class Nodo{
+public class Nodo {
+
     private Nodo padre;
-    private Nodo izquierdo;
     private Nodo derecho;
+    private Nodo izquierdo;
 
     private int indice;
     private String nombre;
 
-
     public Nodo(int indice, String nombre){
         this.nombre = nombre;
         this.indice = indice;
+
         padre = null;
-        izquierdo = null;
         derecho = null;
+        izquierdo = null;
     }
 
     public void mostrarNodo(){
-        System.out.println("Indice: "+indice+" Nombre: "+nombre);
+        System.out.println("Indice: "+indice+" nombre: "+nombre);
     }
 
     public Nodo getPadre() {
         return padre;
     }
 
-    public Nodo getIzquierdo() {
-        return izquierdo;
-    }
-
     public Nodo getDerecho() {
         return derecho;
+    }
+
+    public Nodo getIzquierdo() {
+        return izquierdo;
     }
 
     public int getIndice() {
@@ -43,12 +44,12 @@ public class Nodo{
         this.padre = padre;
     }
 
-    public void setIzquierdo(Nodo izquierdo) {
-        this.izquierdo = izquierdo;
-    }
-
     public void setDerecho(Nodo derecho) {
         this.derecho = derecho;
+    }
+
+    public void setIzquierdo(Nodo izquierdo) {
+        this.izquierdo = izquierdo;
     }
 
     public void setIndice(int indice) {

@@ -1,35 +1,42 @@
 public class Arbol {
-    Nodo raiz;
 
-    public Arbol(){
-        raiz = null;
+    private Nodo raiz;
+    private static Arbol arbol = null;
+
+    private Arbol(){
+        this.raiz = null;
     }
 
-    public void insertarNodo(int indice, String nombre){
+    //Aplicamos singleton para asegurar que solo haya una instancia del arbol
+    public static Arbol getInstance(){
+        if(arbol == null) arbol = new Arbol();
+        return arbol;
+    }
+
+    public void addNodo(int indice, String nombre){
         Nodo nodo = new Nodo(indice, nombre);
 
         if(raiz == null){
             raiz = nodo;
         }else{
+
             Nodo aux = raiz;
             while(aux != null){
                 nodo.setPadre(aux);
 
-                if(nodo.getIndice() > aux.getIndice()){
-                    aux = aux.getDerecho();
-                }else{
+                if(nodo.getIndice() < aux.getIndice()){
                     aux = aux.getIzquierdo();
+                }else{
+                    aux = aux.getDerecho();
                 }
             }
 
-            if(nodo.getPadre().getIndice() < nodo.getIndice()){
-                nodo.getPadre().setDerecho(nodo);
-            }else{
+            if(nodo.getPadre().getIndice() > nodo.getIndice()){
                 nodo.getPadre().setIzquierdo(nodo);
+            }else{
+                nodo.getPadre().setDerecho(nodo);
             }
         }
-
-
     }
 
     public void recorridoInOrden(){
@@ -38,24 +45,13 @@ public class Arbol {
     }
 
     public void recorridoPreOrden(){
-        System.out.println("\nRecorrido pre Orden");
+        System.out.println("\nRecorrido pre orden");
         preOrden(raiz);
     }
 
     public void recorridoPostOrden(){
-        System.out.println("\nRecorrido post Orden");
+        System.out.println("\nRecorrido post orden");
         postOrden(raiz);
-    }
-
-    public String buscarNombreConIndice(int indice){
-
-        Nodo aux = raiz;
-        while (aux != null){
-            if(indice == aux.getIndice()) return aux.getNombre();
-            aux = (aux.getIndice() < indice) ? aux.getDerecho() : aux.getIzquierdo();
-        }
-
-        return "No existe";
     }
 
     private void inOrden(Nodo nodo){
